@@ -5,7 +5,7 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from django.db.models.query_utils import Q
 from articles import serializers
-from articles.models import Article,Comment
+from articles.models import Comment,Movie
 from articles.serializers import ArticleSerializer
 
 
