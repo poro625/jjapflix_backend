@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # rest_framework
     'rest_framework_simplejwt', # jwt
+    'users',
 ]
 
 REST_FRAMEWORK = {  # jwt
@@ -153,3 +154,9 @@ SIMPLE_JWT = {  ##jwt 설정
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = "/static/"
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
