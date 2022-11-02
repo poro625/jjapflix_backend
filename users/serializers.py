@@ -46,3 +46,15 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):   # jwt payloa
         token['email'] = user.email
 
         return token
+    
+class UserUpdateSerializer(serializers.ModelSerializer):  # 프로필 조회
+    class Meta:
+        model = User
+        fields=("nickname", "password")
+        
+    def update(self, validated_data):
+        user = super().create(validated_data)
+        password = user.password
+        user.set_password(password) # 패스워드 해싱
+        user.save()
+        return user 
