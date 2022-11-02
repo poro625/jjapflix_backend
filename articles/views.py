@@ -9,22 +9,22 @@ from articles.models import Comment,Movie
 from articles.serializers import ArticleSerializer
 
 
-class ArticlesView(APIView):  #영화리스트
+class ArticlesView(APIView):  #영화리스트(노우석님)
     def get(self, request):
         pass
 
 
-class ArticlesDetailView(APIView): #영화상세보기
+class ArticlesDetailView(APIView): #영화상세보기(양기철님)
     def get(self, request):
         pass
 
 
-class ArticlesMovieLikeView(APIView): #영화좋아요
+class ArticlesMovieLikeView(APIView): #영화좋아요(성창남님)
     def post(self, request):
         pass
 
 
-class ArticlesCommentView(APIView): #영화리뷰(작성,수정,삭제)
+class ArticlesCommentView(APIView): #영화리뷰(작성,수정,삭제)(노우석님)
 
     def post(self, request):
         pass
@@ -38,14 +38,14 @@ class ArticlesCommentView(APIView): #영화리뷰(작성,수정,삭제)
         pass
 
 
-class ArticlesCommentLikeView(APIView): #영화리뷰좋아요
+class ArticlesCommentLikeView(APIView): #영화리뷰좋아요(성창남님)
 
     def post(self, request):
         pass
 
 
 
-class ArticlesSearchView(APIView): #검색
+class ArticlesSearchView(APIView): #검색(양기철님)
 
 
     def get(self, request):
