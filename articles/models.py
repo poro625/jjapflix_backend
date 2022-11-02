@@ -18,12 +18,12 @@ class Comment(models.Model):
 
 class Movie(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    moive_id = models.CharField()
+    moive_id = models.CharField(max_length =50)
     image = models.URLField()
-    title = models.CharField()
-    release_year = models.DecimalField()
-    rating = models.CharField()
-    duration = models.CharField()
+    title = models.CharField(max_length =50)
+    release_year = models.DecimalField(max_digits=8, decimal_places=0)
+    rating = models.CharField(max_length =50)
+    duration = models.CharField(max_length =50)
     description = models.TextField()
     movie_like = models.ManyToManyField(Comment, related_name="like_movie")
 
