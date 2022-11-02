@@ -34,9 +34,9 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-    def update(self, instance, validated_data):
+    def update(self, instance, validated_data): # 비밀번호 수정 
         instance.password = validated_data.get('password', instance.password)
-        instance.set_password('password')
+        instance.set_password('password') # 패스워드 해싱
         instance.save()
         return instance
        
