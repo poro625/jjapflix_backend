@@ -7,6 +7,13 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 VALID_EMAIL_LIST = ["naver.com", "gmail.com", "daum.net"]
 
 
+
+class UserProfileSerializer(serializers.ModelSerializer):  # 프로필 조회
+    class Meta:
+        model = User
+        fields="__all__"
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
