@@ -33,7 +33,7 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    nickname = models.CharField(max_length=50, blank=True)
+    nickname = models.CharField(max_length=50)
     movie = models.ManyToManyField('self', symmetrical=False, related_name='movies', blank=True)
     profile_image = models.ImageField(blank=True, upload_to="profile_images/")
     is_active = models.BooleanField(default=True)
