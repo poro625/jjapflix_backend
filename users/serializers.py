@@ -19,12 +19,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
         
-    def validate(self, data):
-        if data.get("email", "").split('@')[-1] not in VALID_EMAIL_LIST:
-            raise serializers.ValidationError(
-                detail={"error": "naver, gmail, daum 이메일 주소만 사용 가능합니다."}
-            )
-        return data    
+    # def validate(self, data):
+    #     if data.get("email", "").split('@')[-1] not in VALID_EMAIL_LIST:
+    #         raise serializers.ValidationError(
+    #             detail={"error": "naver, gmail, daum 이메일 주소만 사용 가능합니다."}
+    #         )
+    #     return data    
     
     def create(self, validated_data):
         user = super().create(validated_data)
@@ -40,14 +40,6 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
        
-
-    # def update(self, validated_data):
-    #     user = super().update(validated_data)
-    #     password = user.password
-    #     user.set_password(password) # 패스워드 해싱
-    #     user.save()
-    #     return user 
-
         
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):   # jwt payload 커스텀
     @classmethod
