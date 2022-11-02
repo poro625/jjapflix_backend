@@ -26,5 +26,6 @@ class Movie(models.Model):
     duration = models.CharField(max_length =50)
     description = models.TextField()
     movie_like = models.ManyToManyField(Comment, related_name="like_movie")
+    category = models.CharField(max_length=20, null =True)
 
 
