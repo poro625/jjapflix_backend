@@ -7,8 +7,9 @@ from django.db.models.query_utils import Q
 from articles import serializers
 from articles.models import Comment,Movie
 from articles.serializers import ArticleSerializer,ArticleListSerializer,MovieCommentSerializer, ArticleDetailSerializer
-
-
+from rest_framework import generics
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ArticlesView(APIView):  #영화리스트(노우석님)
     def get(self, request):
@@ -72,15 +73,10 @@ class ArticlesCommentLikeView(APIView): #영화리뷰좋아요(성창남님)
 
 
 
-class ArticlesSearchView(APIView): #검색(양기철님)
-    # queryset = Movie.objects.all()
-    # serializer_class = ArticleSerializer
+class ArticlesSearchView(generics.ListAPIView): #검색(양기철님)
+    queryset = Movie.objects.all()
+    serializer_class = ArticleSerializer
 
-    # filter_backends = [SearchFilter]
-    # # 검색 키워드를 지정했을 때, 매칭을 시도할 필드
-    # search_fields = ['title', 'description', 'category']
-    def get(self, request):
-        pass
-
-    def post(self, request):
-        pass
+    filter_backends = [filters.SearchFilter]
+    # 검색 키워드를 지정했을 때, 매칭을 시도할 필드
+    search_fields = ['title','description','category']
