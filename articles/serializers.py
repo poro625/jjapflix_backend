@@ -1,39 +1,45 @@
 from rest_framework import serializers
 
 from articles.models import Movie,Comment
+from users.models import User
+
 
 class ArticleSerializer(serializers.ModelSerializer):
 
 
     class Meta:
-        model = Comment
+        model = Movie
         fields='__all__'
+# class ArticleListNickname(serializers.ModelSerializer):
 
+#     class Meta:
+#         model = User
+#         fields=['nickname']
 
 
 class ArticleListSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField()
-    comment_like = serializers.StringRelatedField(many=True)
+    movie_like_count= serializers.SerializerMethodField()
 
-
-    def get_user(self, obj):
-        return obj.user.email
-
+    def get_movie_like_count(self, obj):
+        return obj.movie_like.count()
 
     class Meta:
-        model = Comment
+        model = Movie
         fields='__all__'
 
 
+    
+    
 
-class MovieSerializer(serializers.ModelSerializer):
+
+class MovieCommentSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
 
     def get_user(self, obj):
         return obj.user.email
     
     class Meta:
-        model = Movie
+        model = Comment
         fields='__all__'
 
 
