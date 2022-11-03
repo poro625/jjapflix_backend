@@ -8,7 +8,7 @@ from rest_framework.viewsets import ModelViewSet
 from django.db.models.query_utils import Q
 from articles import serializers
 from articles.models import Comment,Movie
-from articles.serializers import ArticleSerializer
+from articles.serializers import ArticleSerializer, ArticleDetailSerializer
 
 
 class ArticlesView(APIView):  #영화리스트(노우석님)
@@ -20,7 +20,7 @@ class ArticlesDetailView(APIView): #영화상세보기(양기철님)
     def get(self, request, movie_id):
         movie = Movie.objects.get(id=movie_id)
         movie = get_object_or_404(Movie, id=movie_id)
-        serializer = ArticleSerializer(movie)
+        serializer = ArticleDetailSerializer(movie)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -59,6 +59,6 @@ class ArticlesSearchView(APIView): #검색(양기철님)
     # search_fields = ['title', 'description', 'category']
     def get(self, request):
         pass
-    
+
     def post(self, request):
         pass
