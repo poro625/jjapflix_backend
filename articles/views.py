@@ -47,6 +47,9 @@ class ArticlesMovieLikeView(APIView): #영화좋아요(성창남님)
 
 
 class ArticlesCommentView(APIView): #영화리뷰(작성,수정,삭제)(노우석님)
+
+    def post(self, request,movie_id):
+
         serializer = MovieCommentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user,movie_id=movie_id)
