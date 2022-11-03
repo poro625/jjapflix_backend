@@ -18,7 +18,7 @@ class Comment(models.Model):
 
 class Movie(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    moive_id = models.CharField(max_length =50)
+    movie_id = models.CharField(max_length =50)
     image = models.URLField()
     title = models.CharField(max_length =50)
     release_year = models.DecimalField(max_digits=8, decimal_places=0)

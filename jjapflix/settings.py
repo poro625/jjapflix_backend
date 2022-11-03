@@ -126,11 +126,7 @@ AUTH_USER_MODEL = 'users.User'
 
 
 SIMPLE_JWT = {  ##jwt 설정
-<<<<<<< HEAD
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1440),
-=======
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=6000),
->>>>>>> 7f644ac28c4365267152dad5c1ad7a0b7e3c86ab
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
