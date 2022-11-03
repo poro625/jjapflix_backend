@@ -27,6 +27,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
 
     movie_like_count= serializers.SerializerMethodField()
 
+
     def get_movie_like_count(self, obj):
         return obj.movie_like.count()
 

@@ -25,7 +25,7 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now= True)
     comment_like = models.ManyToManyField(User, related_name="like_comment",blank=True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE,blank=True)
-    rating = models.CharField(max_length=10)
+    rating = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
         return str(self.content)
