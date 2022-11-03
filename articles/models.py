@@ -3,7 +3,7 @@ from users.models import User
 
 # Create your models here.
 class Movie(models.Model):
-    
+
     movie_id = models.CharField(max_length =50)
     image = models.URLField()
     title = models.CharField(max_length =50)
@@ -14,9 +14,6 @@ class Movie(models.Model):
     movie_like = models.ManyToManyField(User, related_name="like_movie",blank=True)
     category = models.CharField(max_length=20, null =True)
 
-    def __str__(self):
-        return str(self.title)
-
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,7 +23,7 @@ class Comment(models.Model):
     comment_like = models.ManyToManyField(User, related_name="like_comment",blank=True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE,blank=True)
     rating = models.CharField(max_length=10, blank=True)
-
+    
     def __str__(self):
         return str(self.content)
 
