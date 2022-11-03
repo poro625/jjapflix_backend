@@ -2,10 +2,24 @@ from rest_framework import serializers
 from users.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from dj_rest_auth.registration.serializers import RegisterSerializer
 
 
 VALID_EMAIL_LIST = ["naver.com", "gmail.com", "daum.net"]
 
+
+
+
+class customRegistrationSerializer(RegisterSerializer):
+    
+    nickname = serializers.CharField(max_length=20)
+    
+    def get_cleaned_data(self):
+        data = super().get_cleaned_data()
+        data['nickname'] = self.validated_data.get('nickname', '')
+
+        return data
+   
 
 
 class UserProfileSerializer(serializers.ModelSerializer):  # 프로필 조회
