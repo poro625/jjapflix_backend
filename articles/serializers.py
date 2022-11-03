@@ -12,7 +12,10 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class ArticleListSerializer(serializers.ModelSerializer):
-    movie_like= serializers.StringRelatedField(many=True)
+    movie_like= serializers.SerializerMethodField()
+
+    def get_movie(self, obj):
+        return obj.movie_like.nickname
 
     class Meta:
         model = Movie

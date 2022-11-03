@@ -40,13 +40,29 @@ class ArticlesCommentView(APIView): #영화리뷰(작성,수정,삭제)(노우�
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class ArticlesCommentDetailView(APIView):
 
-    def put(self, request):
-        pass   
+    def put(self, request, movie_id, comment_id):
+
+        comment = get_object_or_404(Comment, id= comment_id)
+        if request.user == comment.user:
+            serializer = MovieCommentSerializer(comment, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response("권한이 없습니다!", status=status.HTTP_403_FORBIDDEN)
 
 
-    def delete(self, request):
-        pass
+    def delete(self, request, movie_id, comment_id):
+        comment = get_object_or_404(Comment, id= comment_id)
+        if request.user == comment.user:
+            comment.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response("권한이 없습니다!", status=status.HTTP_403_FORBIDDEN)
 
 
 class ArticlesCommentLikeView(APIView): #영화리뷰좋아요(성창남님)
