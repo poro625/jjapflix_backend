@@ -8,7 +8,7 @@ class Movie(models.Model):
     image = models.URLField()
     title = models.CharField(max_length =50)
     release_year = models.DecimalField(max_digits=8, decimal_places=0)
-    rating = models.CharField(max_length =50)
+    rating = models.CharField(max_length =50,blank = True)
     duration = models.CharField(max_length =50)
     description = models.TextField()
     movie_like = models.ManyToManyField(User, related_name="like_movie",blank=True)
