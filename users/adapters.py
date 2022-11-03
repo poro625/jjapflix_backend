@@ -1,6 +1,6 @@
 from allauth.account.adapter import DefaultAccountAdapter
 
-class CustomAccountAdapter(DefaultAccountAdapter):
+class CustomAccountAdapter(DefaultAccountAdapter): # dj-rest-auth 커스텀
 
     def save_user(self, request, user, form, commit=True):
         data = form.cleaned_data
