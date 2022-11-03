@@ -13,6 +13,8 @@ from rest_framework_simplejwt.views import (
 )
 
 class UserView(APIView):
+    permission_classes = [permissions.AllowAny]
+    
     def post(self, request):  # 회원가입
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -21,29 +23,12 @@ class UserView(APIView):
         else:
             return Response({"message":f"${serializer.errors}"}, status=status.HTTP_400_BAD_REQUEST)
     
-    def put(self, request):
-        user = request.user
-        serializer = UserUpdateSerializer(user, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
-    
     def delete(self, request): # 회원탈퇴
         if request.user.is_authenticated:
             request.user.delete()
             return Response("탈퇴되었습니다!", status=status.HTTP_204_NO_CONTENT)
         else:
             return Response("권한이 없습니다!", status=status.HTTP_403_FORBIDDEN)
-
-    def put(self, request, ):
-        user = request.user
-        serializer = UserSerializer(user, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -57,3 +42,12 @@ class ProfileView(APIView):  # 회원정보 조회
         user = get_object_or_404(User, id=user_id)
         serializer = UserProfileSerializer(user)  
         return Response(serializer.data)
+    
+    def put(self, request, user_id):
+        user = User.objects.get(id=user_id)
+        serializer = UserUpdateSerializer(user, data=request.data, partial=True, context={"request": request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
