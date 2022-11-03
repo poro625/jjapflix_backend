@@ -12,7 +12,6 @@ urlpatterns = [
     path('dj-rest-auth/password/change/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     re_path(r'^account-confirm-email/$', VerifyEmailView.as_view(), name='account_email_verification_sent'),
-    # 유저가 클릭한 이메일(=링크) 확인
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', views.ConfirmEmailView.as_view(), name='account_confirm_email'),
 ]
 
