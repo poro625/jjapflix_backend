@@ -36,10 +36,10 @@ class ArticlesMovieLikeView(APIView): #영화좋아요(성창남님)
         article = get_object_or_404(Movie, id=movie_id)
         if request.user in article.movie_like.all():
             article.movie_like.remove(request.user)
-            return Response("좋아요했습니다", status=status.HTTP_200_OK)
+            return Response("좋아요취소했습니다", status=status.HTTP_200_OK)
         else:
             article.movie_like.add(request.user)
-            return Response("좋아요취소했습니다", status=status.HTTP_200_OK)
+            return Response("좋아요했습니다", status=status.HTTP_200_OK)
             
         
 
@@ -89,10 +89,10 @@ class ArticlesCommentLikeView(APIView): #영화리뷰좋아요(성창남님)
         article = get_object_or_404(Comment, id=comment_id)
         if request.user in article.comment_like.all():
             article.comment_like.remove(request.user)
-            return Response("댓글,좋아요했습니다", status=status.HTTP_200_OK)
+            return Response("댓글,좋아요취소했습니다", status=status.HTTP_200_OK)
         else:
             article.comment_like.add(request.user)
-            return Response("댓글,좋아요취소했습니다", status=status.HTTP_200_OK)
+            return Response("댓글,좋아요했습니다", status=status.HTTP_200_OK)
 
 
 
