@@ -9,7 +9,8 @@ class Comment(models.Model):
     updated_at = models.DateTimeField(auto_now= True)
     comment_like = models.ManyToManyField(User, related_name="like_comment")
 
-
+    def __str__(self):
+        return str(self.content)
 
 
 
