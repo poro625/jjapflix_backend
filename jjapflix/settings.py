@@ -27,9 +27,25 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',  # rest_framework
+    'rest_framework.authtoken',
     'rest_framework_simplejwt', # jwt
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
     'users',
+    
+    'allauth',
+    'allauth.account',
 ]
+
+SITE_ID = 1
+REST_USE_JWT = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None # username 필드 사용 x
+ACCOUNT_EMAIL_REQUIRED = True            # email 필드 사용 o
+ACCOUNT_USERNAME_REQUIRED = False        # username 필드 사용 x
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none' # 회원가입 과정에서 이메일 인증 사용 X
+OLD_PASSWORD_FIELD_ENABLED = True
+LOGOUT_ON_PASSWORD_CHANGE = False
 
 REST_FRAMEWORK = {  # jwt
 
