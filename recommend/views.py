@@ -6,6 +6,9 @@ from recommend.serializers import MovieSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.generics import get_object_or_404
+
+
 
 trends = pd.read_csv('recommend/trend.csv')
 netflix = pd.read_csv('recommend/netflix.csv')
@@ -18,14 +21,38 @@ user_title = user_title.fillna(0)
 item_based_collab = cosine_similarity(user_title, user_title)
 item_based_collab = pd.DataFrame(item_based_collab, index=user_title.index, columns=user_title.index)
 
-def item_based_filtering(request):
-    if request.method == 'GET':
-        movie_list = item_based_collab['더 요트'].sort_values(ascending=False)[:10]
+def item_based_filtering(movie):
+        movie_list = item_based_collab[movie].sort_values(ascending=False)[:10]
         print(movie_list)
         return movie_list
+    
 
 
-class MovieRefresh(APIView):  #영화리스트(노우석님)
+class TasteView(APIView):
+    
+    def item_based_filtering(movie_id):
+        movie_list = item_based_collab[movie_id].sort_values(ascending=False)[:10]
+        print(movie_list)
+        return movie_list
+    
+    
+    def get(self, request, movie_title):
+        item_based_filtering(movie_title)
+        movie = get_object_or_404(Movie, id=movie_title)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class ArticlesDetailView(APIView): #영화상세보기(양기철님)
+    def get(self, request, movie_id):
+        movie = get_object_or_404(Movie, id=movie_id)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class MovieRefresh(APIView):
     def get(self, request):
         movie = Movie.objects.filter(rating__gt=3.5).order_by('?')
         movie = list(movie)[0:10]
