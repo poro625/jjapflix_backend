@@ -41,10 +41,6 @@ class ArticlesMovieLikeView(APIView): #영화좋아요(성창남님)
             article.movie_like.add(request.user)
             return Response("좋아요했습니다", status=status.HTTP_200_OK)
             
-        
-
-
-
 
 class ArticlesCommentView(APIView): #영화리뷰(작성,수정,삭제)(노우석님)
 
