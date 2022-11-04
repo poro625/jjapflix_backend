@@ -23,7 +23,6 @@ class ArticlesView(APIView):  #영화리스트(노우석님)
 
 class ArticlesDetailView(APIView): #영화상세보기(양기철님)
     def get(self, request, movie_id):
-        movie = Movie.objects.get(id=movie_id)
         movie = get_object_or_404(Movie, id=movie_id)
         serializer = ArticleDetailSerializer(movie)
         return Response(serializer.data, status=status.HTTP_200_OK)
