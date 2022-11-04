@@ -29,8 +29,6 @@ class ArticlesDetailView(APIView): #영화상세보기(양기철님)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-
-
 class ArticlesMovieLikeView(APIView): #영화좋아요(성창남님)
     def post(self, request,movie_id ):
         article = get_object_or_404(Movie, id=movie_id)
