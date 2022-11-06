@@ -48,9 +48,6 @@ class ArticleListSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 
-    
-    
-
 
 class MovieCommentSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()

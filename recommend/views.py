@@ -1,6 +1,7 @@
+from django.shortcuts import render, redirect
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
-from articles.models import Movie, Category
+from articles.models import Movie, Category, Taste
 from django.db.models import Max
 from recommend.serializers import MovieSerializer
 from rest_framework.response import Response
@@ -21,11 +22,9 @@ item_based_collab = pd.DataFrame(item_based_collab, index=user_title.index, colu
 
 
 def item_based_filtering(movie):
-        movie_list = item_based_collab[movie].sort_values(ascending=False)[:10]
+        movie_list = item_based_collab[movie].sort_values(ascending=False)[1:21]
         print(movie_list)
-        return 
-
-
+        return movie_list.index
 class TasteView(APIView):
     
     def get(self, request, movie_title):
@@ -33,9 +32,6 @@ class TasteView(APIView):
         movie = get_object_or_404(Movie, id=movie_title)
         serializer = MovieSerializer(movie)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-
 
 class MovieRefresh(APIView):  #영화리스트(노우석님)
     def get(self, request):
