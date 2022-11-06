@@ -28,13 +28,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'corsheaders',
+    "corsheaders",
     'rest_framework',  # rest_framework
     'rest_framework.authtoken',
     'rest_framework_simplejwt', # jwt
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'users',
+    'recommend',
 
     'articles',
     
@@ -88,6 +89,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
