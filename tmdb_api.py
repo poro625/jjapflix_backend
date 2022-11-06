@@ -1,9 +1,10 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jjapflix.settings')
-
+import dotenv
+dotenv.read_dotenv()
 import django
 django.setup()
-import dotenv
+
 
 import requests
 
